@@ -1,0 +1,44 @@
+﻿@model Quanlythuvien.Models.TblTheLoai
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+            <h4 class="mb-0"><i class="bi bi-person-plus"></i> Thêm thể loại mới</h4>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Create" accept-charset="utf-8">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3" role="alert"></div>
+
+                <div class="mb-3">
+                    <label asp-for="MaTl" class="form-label fw-semibold">Mã Thể Loại</label>
+                    <input asp-for="MaTl" class="form-control" value="@ViewBag.NextMaTL" readonly />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="TenTl" class="form-label fw-semibold"></label>
+                    <input asp-for="TenTl" class="form-control" placeholder="Nhập Tên Thể Loại..." />
+                    <span asp-validation-for="TenTl" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Mota" class="form-label fw-semibold"></label>
+                    <input asp-for="Mota" class="form-control" placeholder="Nhập Mô Tả..." />
+                    <span asp-validation-for="Mota" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left-circle"></i> Quay lại
+                    </a>
+                    <button type="submit" class="btn btn-success px-4">
+                        <i class="bi bi-check-circle"></i> Thêm mới
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,270 @@
+﻿@{
+    List<TblSach> sach = ViewBag.sach;
+    var bestBooks = ViewBag.BestBooks as List<Quanlythuvien.Models.TblSach>;
+}
+<!-- Carousel Start -->
+<div class="container-fluid carousel bg-light px-0">
+    <div class="row g-0 justify-content-end">
+        <div class="col-12 col-lg-7 col-xl-9">
+            <div class="header-carousel owl-carousel bg-light py-5">
+                <div class="row g-0 header-carousel-item align-items-center">
+                    <div class="col-xl-6 carousel-img wow fadeInLeft" data-wow-delay="0.1s">
+                        <img src="~/img/img2.jpg" class="img-fluid w-100" alt="Image">
+                    </div>
+                    <div class="col-xl-6 carousel-content p-4">
+                        <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight" data-wow-delay="0.1s" style="letter-spacing: 3px;">THƯ VIỆN SỐ HIỆN ĐẠI</h4>
+                        <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">Khám phá kho tri thức không giới hạn</h1>
+                        <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">Cung cấp ngàn đầu sách, luận văn và tài liệu học tập cho sinh viên.</p>
+                        <a class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight" data-wow-delay="0.7s" href="#">Khám phá ngay</a>
+                    </div>
+                </div>
+                <div class="row g-0 header-carousel-item align-items-center">
+                    <div class="col-xl-6 carousel-img wow fadeInLeft" data-wow-delay="0.1s">
+                        <img src="~/img/img4.jpg" class="img-fluid w-100" alt="Image">
+                    </div>
+                    <div class="col-xl-6 carousel-content p-4">
+                        <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight" data-wow-delay="0.1s" style="letter-spacing: 3px;">TÀI LIỆU HỌC TẬP</h4>
+                        <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">Cập nhật giáo trình và sách mới nhất</h1>
+                        <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">Phục vụ mọi chuyên ngành, giúp bạn học tập hiệu quả hơn.</p>
+                        <a class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight" data-wow-delay="0.7s" href="#">Xem tài liệu</a>
+                    </div>
+                </div>
+                <div class="row g-0 header-carousel-item align-items-center">
+                    <div class="col-xl-6 carousel-img wow fadeInLeft" data-wow-delay="0.1s">
+                        <img src="~/img/img3.jpg" class="img-fluid w-100" alt="Image">
+                    </div>
+                    <div class="col-xl-6 carousel-content p-4">
+                        <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight" data-wow-delay="0.1s" style="letter-spacing: 3px;">HOẠT ĐỘNG & SỰ KIỆN</h4>
+                        <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">Tham gia ngày hội đọc sách và trao đổi học thuật.</h1>
+                        <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">Cùng nhau lan tỏa niềm đam mê đọc sách và học hỏi</p>
+                        <a class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight" data-wow-delay="0.7s" href="#">Tìm hiểu thêm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<!-- Carousel End -->
+<!-- Searvices Start -->
+<div class="container-fluid px-0">
+    <div class="row g-0">
+        <div class="col-6 col-md-4 col-lg-2 border-start border-end wow fadeInUp" data-wow-delay="0.1s">
+            <div class="p-4">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-book fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Kho sách phong phú</h6>
+                        <p class="mb-0">Hàng nghìn đầu sách học tập và tham khảo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.2s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fa fa-desktop fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Tra cứu trực tuyến</h6>
+                        <p class="mb-0">Tìm kiếm tài liệu nhanh chóng, tiện lợi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.3s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fa fa-user-graduate fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Hỗ trợ sinh viên</h6>
+                        <p class="mb-0">Luôn sẵn sàng hướng dẫn sử dụng thư viện</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.4s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fa fa-calendar-check fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Mượn trả dễ dàng</h6>
+                        <p class="mb-0">Quản lý sách mượn trả nhanh chóng</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.5s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fa fa-lock fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Tài khoản an toàn</h6>
+                        <p class="mb-0">Bảo mật thông tin người dùng tuyệt đối</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-2 border-end wow fadeInUp" data-wow-delay="0.6s">
+            <div class="p-4">
+                <div class="d-flex align-items-center">
+                    <i class="fa fa-clock fa-2x text-primary"></i>
+                    <div class="ms-4">
+                        <h6 class="text-uppercase mb-2">Giờ mở cửa linh hoạt</h6>
+                        <p class="mb-0">Phục vụ sinh viên cả cuối tuần</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Searvices End -->
+<!-- Products Offer Start -->
+<div class="container-fluid bg-light py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+                <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
+                    <div>
+                        <p class="text-muted mb-3">Trải nghiệm thư viện số hiện đại</p>
+                        <h3 class="text-primary">Mượn sách nhanh chóng</h3>
+                        <h1 class="display-3 text-secondary mb-0">Chỉ với <span class="text-primary fw-normal">1 cú nhấp chuột</span></h1>
+                    </div>
+                    <img src="~/img/h1.jpg" class="img-fluid" alt="">
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
+                <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
+                    <div>
+                        <p class="text-muted mb-3">Phục vụ học sinh - sinh viên toàn trường</p>
+                        <h3 class="text-primary">Kho sách và tài liệu phong phú</h3>
+                        <h1 class="display-3 text-secondary mb-0">Hơn <span class="text-primary fw-normal">10.000 đầu sách</span></h1>
+                    </div>
+                    <img src="~/img/h2.jpg" class="img-fluid" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Products Offer End -->
+
+@await Component.InvokeAsync("Product")
+
+<!-- Our Products End -->
+<!-- Product Banner Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <a href="#">
+                    <div class="bg-primary rounded position-relative">
+                        <img src="~/img/b3.jpg" class="img-fluid w-100 rounded" alt="">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4"
+                             style="background: rgba(255, 255, 255, 0.6);">
+                            <h3 class="display-6 text-primary fw-bold">Khám Phá Kho Sách<br><span class="text-secondary">Thư Viện Trường</span></h3>
+                            <p class="fs-5 text-muted mb-3">Hàng ngàn đầu sách cho học sinh & sinh viên</p>
+                            <a href="#" class="btn btn-primary rounded-pill align-self-start py-2 px-4">Xem Sách</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+                <a href="#">
+                    <div class="text-center bg-primary rounded position-relative">
+                        <img src="~/img/b2.jpg" class="img-fluid w-100" alt="">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4"
+                             style="background: rgba(255, 255, 255, 0.6);">
+                            <h3 class="display-6 text-primary fw-bold">Tuần lễ đọc sách<br><span class="text-secondary">Thư Viện Trường</span></h3>
+                            <p class="fs-5 text-muted mb-3">Mượn sách miễn phí và nhận quà tặng nhỏ</p>
+                            <a href="#" class="btn btn-primary rounded-pill align-self-start py-2 px-4">Tham gia ngay</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Product Banner End -->
+
+<!-- Product List Satrt -->
+<div class="container-fluid products productList overflow-hidden">
+    <div class="container products-mini py-5">
+        <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+            <h4 class="text-primary border-bottom border-primary border-2 d-inline-block p-2 title-border-radius wow fadeInUp" data-wow-delay="0.1s">Sách</h4>
+            <h1 class="mb-0 display-3 wow fadeInUp" data-wow-delay="0.3s"></h1>
+        </div>
+        <div class="productList-carousel owl-carousel pt-4 wow fadeInUp" data-wow-delay="0.3s">
+            @foreach (var item in ViewBag.sach)
+            {
+                string sUrl = $"/product/{item.TenSach}-{item.MaSach}.html";
+
+                <div class="productImg-item products-mini-item border">
+                    <div class="row g-0">
+                        <div class="col-5">
+                            <div class="products-mini-img border-end h-100">
+                                <img href="@sUrl" src="@item.Anh" class="img-fluid w-100 h-100" alt="@item.TenSach">
+                                <div class="products-mini-icon rounded-circle bg-primary">
+                                    <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="products-mini-content p-3">
+                                <a href="@sUrl" class="d-block h4">@item.TenSach</a>
+                                <p class="fw-bold mb-0">
+                                    Số lượng còn lại:
+                                    <span class="text-warning fs-5">@item.Soluong</span>
+                                    <small class="text-muted">quyển</small>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-mini-add border p-3">
+                        <a href="#" class="btn btn-primary border-secondary rounded-pill py-2 px-4">
+                            <i class="fas fa-shopping-cart me-2"></i> Thêm vào giỏ
+                        </a>
+                        <div class="d-flex">
+                            <a href="#" class="text-primary d-flex align-items-center justify-content-center me-3">
+                                <span class="rounded-circle btn-sm-square border"><i class="fas fa-random"></i></span>
+                            </a>
+                            <a href="#" class="text-primary d-flex align-items-center justify-content-center">
+                                <span class="rounded-circle btn-sm-square border"><i class="fas fa-heart"></i></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Product List End -->
+<!-- Bestseller Products Start -->
+<div class="container-fluid products pb-5">
+    <div class="container products-mini py-5">
+        <div class="mx-auto text-center mb-5" style="max-width: 700px;">
+            <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius wow fadeInUp" data-wow-delay="0.1s">Sách được mượn nhiều nhất</h4>
+            <p class="mb-0 wow fadeInUp" data-wow-delay="0.2s">Khám phá những cuốn sách yêu thích và mượn nhiều nhất tại thư viện. Hãy nhanh tay mượn để không bỏ lỡ nhé!</p>
+        </div>
+        <div class="row g-4">
+            @foreach (var item in ViewBag.BestBooks)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="border rounded p-3 text-center">
+                        <img src="@item.Anh"
+                             class="img-thumbnail rounded-circle mb-3"
+                             style="width:100px; height:100px; object-fit:cover;"
+                             alt="@item.TenSach">                        <h5>@item.TenSach</h5>
+                        <p class="text-muted">Lượt mượn: @item.LuotMuon</p>
+                        <a href="#" class="btn btn-primary rounded-pill px-4">Mượn ngay</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Bestseller Products End -->

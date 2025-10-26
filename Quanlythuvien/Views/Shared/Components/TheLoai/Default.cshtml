@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Quanlythuvien.Models.TblTheLoai>
+
+<ul class="list-unstyled categories-bars">
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="categories-bars-item">
+                <a href="#">@item.TenTl</a>
+            </div>
+        </li>
+    }
+</ul>

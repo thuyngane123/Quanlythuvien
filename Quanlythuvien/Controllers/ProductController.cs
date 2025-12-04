@@ -38,6 +38,7 @@ namespace Quanlythuvien.Controllers
                 .Include(s => s.MaTlNavigation)
                 .Include(s => s.MaTgNavigation)
                 .Include(s => s.MaNxbNavigation)
+                .Include(s => s.MaTgs)
                 .FirstOrDefaultAsync(s => s.MaSach == MaSach);
 
             if (sach == null)
@@ -55,6 +56,8 @@ namespace Quanlythuvien.Controllers
        .ToList();
             return View(sach);
         }
-    
-}
+        
+
+
+    }
 }

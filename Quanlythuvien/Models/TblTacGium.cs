@@ -12,4 +12,6 @@ public partial class TblTacGium
     public string? Mota { get; set; }
 
     public virtual ICollection<TblSach> TblSaches { get; set; } = new List<TblSach>();
+
+    public virtual ICollection<TblSach> MaSaches { get; set; } = new List<TblSach>();
 }

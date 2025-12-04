@@ -94,7 +94,18 @@
                     <div class="col-xl-6">
                         <h4 class="fw-bold mb-3">@Model.TenSach</h4>
                         <p class="mb-3">Thể Loại: @Model.MaTlNavigation.TenTl</p>
-                        <p class="mb-3">Tác Giả: @Model.MaTgNavigation.TenTg</p>
+                        <p class="mb-3">
+                            Tác Giả:
+                            @if (Model.MaTgs != null && Model.MaTgs.Any())
+                            {
+                                // Kết hợp tên các tác giả thành một chuỗi, cách nhau bằng ", "
+                                @string.Join(", ", Model.MaTgs.Select(tg => tg.TenTg))
+                            }
+                            else
+                            {
+                                <span>(Đang cập nhật)</span>
+                            }
+                        </p>
 
                         <div class="d-flex mb-4">
                             <i class="fa fa-star text-secondary"></i>
@@ -103,44 +114,58 @@
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star"></i>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="pickupDate">Ngày nhận sách:</label>
-                                <input id="pickupDate" name="pickupDate" type="date" class="form-control" required>
+                        <form asp-controller="Cart" asp-action="Index" method="post">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="pickupDate">Ngày nhận sách:</label>
+                                    <input id="pickupDate" name="NgayMuon" type="date" class="form-control" required>
+                                </div>
+                            </div>
 
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="returnDate">Ngày trả sách:</label>
+                                    <input id="returnDate" name="NgayTra" type="date" class="form-control" required>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="returnDate">Ngày trả sách:</label>
-                                <input id="returnDate" name="returnDate" type="date" class="form-control" required>
+                            <input type="hidden" name="MaSach" value="@Model.MaSach" />
 
+                            <div class="mb-3">
+                                <div class="btn btn-primary d-inline-block rounded text-white py-1 px-4 me-2">
+                                    <i class="fab fa-facebook-f me-1"></i> Share
+                                </div>
+                                <div class="btn btn-secondary d-inline-block rounded text-white py-1 px-4 ms-2">
+                                    <i class="fab fa-twitter ms-1"></i> Share
+                                </div>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="btn btn-primary d-inline-block rounded text-white py-1 px-4 me-2"><i class="fab fa-facebook-f me-1"></i> Share</div>
-                            <div class="btn btn-secondary d-inline-block rounded text-white py-1 px-4 ms-2"><i class="fab fa-twitter ms-1"></i> Share</div>
-                        </div>
-                        <div class="d-flex flex-column mb-3">
-                            <small>Năm xuất bản: @Model.MaNxbNavigation.TenNxb</small>
-                            <small>Số lượng: <strong class="text-primary">@Model.Soluong</strong></small>
-                        </div>
-                        <p class="mb-4">@Model.Mota</p>
-                        <div class="input-group quantity mb-5" style="width: 100px;">
-                            <div class="input-group-btn">
-                                <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                    <i class="fa fa-minus"></i>
-                                </button>
+
+                            <div class="d-flex flex-column mb-3">
+                                <small>Năm xuất bản: @Model.MaNxbNavigation.TenNxb</small>
+                                <small>Số lượng: <strong class="text-primary">@Model.Soluong</strong></small>
                             </div>
-                            <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                            <div class="input-group-btn">
-                                <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                    <i class="fa fa-plus"></i>
-                                </button>
+
+                            <p class="mb-4">@Model.Mota</p>
+
+                            <div class="input-group quantity mb-5" style="width: 100px;">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                                <input type="text" class="form-control form-control-sm text-center border-0" value="1" name="SoLuong">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <a href="#" class="btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-white"></i> Mượn ngay</a>
+
+                            <button type="submit" class="btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-white">
+                                <i class="fa fa-shopping-bag me-2"></i> Mượn ngay
+                            </button>
+                        </form>
+
                     </div>
                     <div class="col-lg-12">
                         <nav>
@@ -216,6 +241,7 @@
             {
                 foreach (var item in ViewBag.sach)
                 {
+                    string sUrl = $"/product/{item.TenSach}-{item.MaSach}.html";
                     <div class="related-item rounded">
                         <div class="related-item-inner border rounded">
                             <div class="related-item-inner-item position-relative">
@@ -229,13 +255,13 @@
                             </div>
 
                             <div class="text-center rounded-bottom p-4">
-                                <a href="" class="d-block mb-2">@item.TenSach</a>
+                                <a href="@sUrl" class="d-block mb-2">@item.TenSach</a>
                                 <div class="d-block h6">Số lượng: @item.Soluong</div>
                             </div>
                         </div>
 
                         <div class="related-item-add border border-top-0 rounded-bottom text-center p-4 pt-0 mt-2">
-                            <a href="#" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4"><i class="fas fa-shopping-cart me-2"></i> Thuê nhanh</a>
+                            <a href="@sUrl" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4"><i class="fas fa-shopping-cart me-2">Mượn Ngay</i></a>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex">
                                     <i class="fas fa-star text-primary"></i>

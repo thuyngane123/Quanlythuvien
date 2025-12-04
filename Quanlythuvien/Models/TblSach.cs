@@ -34,4 +34,6 @@ public partial class TblSach
     public virtual TblTheLoai MaTlNavigation { get; set; } = null!;
 
     public virtual ICollection<TblMuonTra> TblMuonTras { get; set; } = new List<TblMuonTra>();
+
+    public virtual ICollection<TblTacGium> MaTgs { get; set; } = new List<TblTacGium>();
 }

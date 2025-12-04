@@ -1,0 +1,81 @@
+﻿@model Quanlythuvien.Models.TblMuonTra
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+            <h4 class="mb-0"><i class="bi bi-book"></i> Thêm Phiếu Mượn Mới</h4>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Create" method="post" accept-charset="utf-8">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3" role="alert"></div>
+                <div class="mb-3">
+                    <label asp-for="MaMuon" class="form-label fw-semibold">Mã mượn</label>
+                    <input type="text" class="form-control" value="@ViewBag.NextMaMuon" readonly />
+                    <input type="hidden" asp-for="MaMuon" value="@ViewBag.NextMaMuon" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="MaKh" class="form-label fw-semibold">Khách hàng</label>
+                    <select asp-for="MaKh" class="form-select" asp-items="ViewBag.MaKh">
+                        <option value="">-- Chọn khách hàng --</option>
+                    </select>
+                    <span asp-validation-for="MaKh" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="MaSach" class="form-label fw-semibold">Sách mượn</label>
+                    <select asp-for="MaSach" class="form-select" asp-items="ViewBag.MaSach">
+                        <option value="">-- Chọn sách --</option>
+                    </select>
+                    <span asp-validation-for="MaSach" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Ngaymuon" class="form-label fw-semibold">Ngày mượn</label>
+                    <input asp-for="Ngaymuon" type="date" class="form-control" />
+                    <span asp-validation-for="Ngaymuon" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Ngaytra" class="form-label fw-semibold">Ngày trả</label>
+                    <input asp-for="Ngaytra" type="date" class="form-control" />
+                    <span asp-validation-for="Ngaytra" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Trangthai" class="form-label fw-semibold">Trạng thái</label>
+                    <select asp-for="Trangthai" class="form-select">
+                        <option value="Đang mượn">Đang mượn</option>
+                        <option value="Đã trả">Đã trả</option>
+                    </select>
+                    <span asp-validation-for="Trangthai" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left-circle"></i> Quay lại
+                    </a>
+                    <button type="submit" class="btn btn-success px-4">
+                        <i class="bi bi-check-circle"></i> Thêm mới
+                    </button>
+                </div>
+            </form>
+            @if (ViewBag.ModelErrors != null)
+            {
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach (var err in ViewBag.ModelErrors)
+                        {
+                            <li>@err</li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+</div>

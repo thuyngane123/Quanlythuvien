@@ -66,3 +66,61 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+
+            form.addEventListener("submit", function(e) {
+                let isValid = true;
+
+                // Lấy các input cần kiểm tra
+                const tenNv = document.querySelector("[name='TenNv']");
+                const matkhau = document.querySelector("[name='Matkhau']");
+                const hoten = document.querySelector("[name='Hoten']");
+                const diachi = document.querySelector("[name='Diachi']");
+                const sdt = document.querySelector("[name='Sodienthoai']");
+                const trangthai = document.querySelector("[name='Trangthai']");
+
+                // Xóa thông báo lỗi cũ
+                document.querySelectorAll(".text-danger").forEach(el => el.textContent = "");
+
+                // Kiểm tra từng trường
+                if (tenNv.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='TenNv']").textContent = "Tên nhân viên không được để trống";
+                    isValid = false;
+                }
+
+                if (matkhau.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Matkhau']").textContent = "Mật khẩu không được để trống";
+                    isValid = false;
+                }
+
+                if (hoten.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Hoten']").textContent = "Họ tên không được để trống";
+                    isValid = false;
+                }
+
+                if (diachi.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Diachi']").textContent = "Địa chỉ không được để trống";
+                    isValid = false;
+                }
+
+                if (sdt.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Sodienthoai']").textContent = "Số điện thoại không được để trống";
+                    isValid = false;
+                }
+
+                if (trangthai.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Trangthai']").textContent = "Trạng thái không được để trống";
+                    isValid = false;
+                }
+
+                // Nếu có lỗi thì ngăn không cho submit
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}

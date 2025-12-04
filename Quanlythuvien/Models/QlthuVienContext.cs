@@ -31,10 +31,7 @@ public partial class QlthuVienContext : DbContext
 
     public virtual DbSet<TblThongKe> TblThongKes { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("data source= NGAMOM\\MSSQLSERVER01; initial catalog=QLThuVien; integrated security=True;TrustServerCertificate=True;");
-
+   
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TblKhachHang>(entity =>
@@ -68,7 +65,7 @@ public partial class QlthuVienContext : DbContext
 
         modelBuilder.Entity<TblMuonTra>(entity =>
         {
-            entity.HasKey(e => new { e.MaMuon, e.MaKh, e.MaSach }).HasName("PK_tblMuonTra_1");
+            entity.HasKey(e => e.MaMuon);
 
             entity.ToTable("tblMuonTra");
 
@@ -153,9 +150,7 @@ public partial class QlthuVienContext : DbContext
             entity.Property(e => e.MaNxb).HasColumnName("MaNXB");
             entity.Property(e => e.MaTg).HasColumnName("MaTG");
             entity.Property(e => e.MaTl).HasColumnName("MaTL");
-            entity.Property(e => e.Mota)
-                .HasMaxLength(255)
-                .HasColumnName("mota");
+            entity.Property(e => e.Mota).HasColumnName("mota");
             entity.Property(e => e.NamXb).HasColumnName("namXB");
             entity.Property(e => e.Soluong).HasColumnName("soluong");
             entity.Property(e => e.TenSach)
@@ -179,6 +174,24 @@ public partial class QlthuVienContext : DbContext
                 .HasForeignKey(d => d.MaTl)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_tblSach_tblTheLoai");
+
+            entity.HasMany(d => d.MaTgs).WithMany(p => p.MaSaches)
+                .UsingEntity<Dictionary<string, object>>(
+                    "TblSachTacGium",
+                    r => r.HasOne<TblTacGium>().WithMany()
+                        .HasForeignKey("MaTg")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_TblSachTacGia_TacGia"),
+                    l => l.HasOne<TblSach>().WithMany()
+                        .HasForeignKey("MaSach")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_TblSachTacGia_Sach"),
+                    j =>
+                    {
+                        j.HasKey("MaSach", "MaTg");
+                        j.ToTable("TblSachTacGia");
+                        j.IndexerProperty<int>("MaTg").HasColumnName("MaTG");
+                    });
         });
 
         modelBuilder.Entity<TblTacGium>(entity =>

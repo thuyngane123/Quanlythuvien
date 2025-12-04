@@ -1,4 +1,4 @@
-﻿@model Quanlythuvien.Models.TblTheLoai
+﻿@model Quanlythuvien.Models.TblTacGium
 
 @{
     ViewData["Title"] = "Create";
@@ -8,25 +8,26 @@
 <div class="container mt-5">
     <div class="card shadow-lg border-0 rounded-4">
         <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
-            <h4 class="mb-0"><i class="bi bi-person-plus"></i> Thêm thể loại mới</h4>
+            <h4 class="mb-0"><i class="bi bi-person-plus"></i> Thêm tác giả mới</h4>
         </div>
         <div class="card-body p-4">
             <form asp-action="Create" accept-charset="utf-8">
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3" role="alert"></div>
 
                 <div class="mb-3">
-                    <label asp-for="MaTl" class="form-label fw-semibold">Mã Thể Loại</label>
-                    <input asp-for="MaTl" class="form-control" value="@ViewBag.NextMaTL" readonly />
+                    <label asp-for="MaTg" class="form-label fw-semibold">Mã Khách Hàng</label>
+                    <input asp-for="MaTg" class="form-control" value="@ViewBag.NextMaTg" readonly />
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="TenTl" class="form-label fw-semibold"></label>
-                    <input asp-for="TenTl" class="form-control" placeholder="Nhập Tên Thể Loại..." />
-                    <span asp-validation-for="TenTl" class="text-danger"></span>
+                    <label asp-for="TenTg" class="form-label fw-semibold"></label>
+                    <input asp-for="TenTg" class="form-control" placeholder="Nhập tên tác giả..." />
+                    <span asp-validation-for="TenTg" class="text-danger"></span>
                 </div>
+
                 <div class="mb-3">
                     <label asp-for="Mota" class="form-label fw-semibold"></label>
-                    <input asp-for="Mota" class="form-control" placeholder="Nhập Mô Tả..." />
+                    <input asp-for="Mota"  class="form-control" placeholder="Nhập mô tả..." />
                     <span asp-validation-for="Mota" class="text-danger"></span>
                 </div>
 
@@ -38,6 +39,7 @@
                         <i class="bi bi-check-circle"></i> Thêm mới
                     </button>
                 </div>
+
             </form>
         </div>
     </div>
@@ -51,21 +53,32 @@
                 let isValid = true;
 
                 // Lấy các input cần kiểm tra
-                const tenTl = document.querySelector("[name='TenTl']");
+                const tenTg = document.querySelector("[name='TenTg']");
                 const mota = document.querySelector("[name='Mota']");
 
                 // Xóa thông báo lỗi cũ
                 document.querySelectorAll(".text-danger").forEach(el => el.textContent = "");
+                document.querySelectorAll(".form-control").forEach(el => el.classList.remove("is-invalid"));
 
-                // Kiểm tra tên thể loại
-                if (tenTl.value.trim() === "") {
-                    document.querySelector("[data-valmsg-for='TenTl']").textContent = "Tên thể loại không được để trống";
+                // Kiểm tra tên tác giả
+                if (tenTg.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='TenTg']").textContent = "Tên tác giả không được để trống";
+                    tenTg.classList.add("is-invalid");
+                    isValid = false;
+                } else if (tenTg.value.trim().length < 3) {
+                    document.querySelector("[data-valmsg-for='TenTg']").textContent = "Tên tác giả phải có ít nhất 3 ký tự";
+                    tenTg.classList.add("is-invalid");
                     isValid = false;
                 }
 
                 // Kiểm tra mô tả
                 if (mota.value.trim() === "") {
                     document.querySelector("[data-valmsg-for='Mota']").textContent = "Mô tả không được để trống";
+                    mota.classList.add("is-invalid");
+                    isValid = false;
+                } else if (mota.value.trim().length < 10) {
+                    document.querySelector("[data-valmsg-for='Mota']").textContent = "Mô tả phải có ít nhất 10 ký tự";
+                    mota.classList.add("is-invalid");
                     isValid = false;
                 }
 

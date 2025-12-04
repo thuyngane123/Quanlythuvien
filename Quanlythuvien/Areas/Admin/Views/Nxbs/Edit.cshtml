@@ -1,4 +1,4 @@
-﻿@model Quanlythuvien.Models.TblNhanVien
+﻿@model Quanlythuvien.Models.TblNxb
 
 @{
     ViewData["Title"] = "Edit";
@@ -8,36 +8,24 @@
 <div class="container mt-5">
     <div class="card shadow-lg border-0 rounded-4">
         <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
-            <h4 class="mb-0"><i class="bi bi-person-plus"></i> Sửa thông tin nhân viên</h4>
+            <h4 class="mb-0"><i class="bi bi-person-plus"></i> Sửa thông tin nhà xuất bản</h4>
         </div>
         <div class="card-body p-4">
             <form asp-action="Edit" method="post" accept-charset="utf-8">
-                <input type="hidden" asp-for="MaNv" />
+                <input type="hidden" asp-for="MaNxb" />
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Mã nhân viên</label>
+                    <label class="form-label fw-semibold">Mã NXB</label>
                     <input type="text" class="form-control" value="" readonly />
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="TenNv" class="form-label fw-semibold"></label>
-                    <input asp-for="TenNv" class="form-control" placeholder="Nhập tên đăng nhập..." />
-                    <span asp-validation-for="TenNv" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="Matkhau" class="form-label fw-semibold"></label>
-                    <input asp-for="Matkhau" type="password" class="form-control" placeholder="Nhập mật khẩu..." />
-                    <span asp-validation-for="Matkhau" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="Hoten" class="form-label fw-semibold"></label>
-                    <input asp-for="Hoten" class="form-control" placeholder="Nhập họ tên..." />
-                    <span asp-validation-for="Hoten" class="text-danger"></span>
+                    <label asp-for="TenNxb" class="form-label fw-semibold"></label>
+                    <input asp-for="TenNxb" class="form-control" placeholder="Nhập tên nhà xuất bản..." />
+                    <span asp-validation-for="TenNxb" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="Diachi" class="form-label fw-semibold"></label>
-                    <input asp-for="Diachi"  class="form-control" placeholder="Nhập địa chỉ ..." />
+                    <input asp-for="Diachi" class="form-control" placeholder="Nhập địa chỉ..." />
                     <span asp-validation-for="Diachi" class="text-danger"></span>
                 </div>
 
@@ -45,11 +33,6 @@
                     <label asp-for="Sodienthoai" class="form-label fw-semibold"></label>
                     <input asp-for="Sodienthoai" class="form-control" placeholder="Nhập số điện thoại..." />
                     <span asp-validation-for="Sodienthoai" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="Trangthai" class="form-label fw-semibold"></label>
-                    <input asp-for="Trangthai" class="form-control" placeholder="Nhập trạng thái..." />
-                    <span asp-validation-for="Trangthai" class="text-danger"></span>
                 </div>
 
                 <div class="d-flex justify-content-between mt-4">
@@ -73,48 +56,35 @@
                 let isValid = true;
 
                 // Lấy các input cần kiểm tra
-                const tenNv = document.querySelector("[name='TenNv']");
-                const matkhau = document.querySelector("[name='Matkhau']");
-                const hoten = document.querySelector("[name='Hoten']");
+                const tenNxb = document.querySelector("[name='TenNxb']");
                 const diachi = document.querySelector("[name='Diachi']");
                 const sdt = document.querySelector("[name='Sodienthoai']");
-                const trangthai = document.querySelector("[name='Trangthai']");
 
                 // Xóa thông báo lỗi cũ
                 document.querySelectorAll(".text-danger").forEach(el => el.textContent = "");
 
-                // Kiểm tra từng trường
-                if (tenNv.value.trim() === "") {
-                    document.querySelector("[data-valmsg-for='TenNv']").textContent = "Tên nhân viên không được để trống";
+                // Kiểm tra tên NXB
+                if (tenNxb.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='TenNxb']").textContent = "Tên nhà xuất bản không được để trống";
                     isValid = false;
                 }
 
-                if (matkhau.value.trim() === "") {
-                    document.querySelector("[data-valmsg-for='Matkhau']").textContent = "Mật khẩu không được để trống";
-                    isValid = false;
-                }
-
-                if (hoten.value.trim() === "") {
-                    document.querySelector("[data-valmsg-for='Hoten']").textContent = "Họ tên không được để trống";
-                    isValid = false;
-                }
-
+                // Kiểm tra địa chỉ
                 if (diachi.value.trim() === "") {
                     document.querySelector("[data-valmsg-for='Diachi']").textContent = "Địa chỉ không được để trống";
                     isValid = false;
                 }
 
+                // Kiểm tra số điện thoại
                 if (sdt.value.trim() === "") {
                     document.querySelector("[data-valmsg-for='Sodienthoai']").textContent = "Số điện thoại không được để trống";
                     isValid = false;
-                }
-
-                if (trangthai.value.trim() === "") {
-                    document.querySelector("[data-valmsg-for='Trangthai']").textContent = "Trạng thái không được để trống";
+                } else if (!/^(0\d{9})$/.test(sdt.value.trim())) {
+                    document.querySelector("[data-valmsg-for='Sodienthoai']").textContent = "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng 0";
                     isValid = false;
                 }
 
-                // Nếu có lỗi thì ngăn không cho submit
+                // Ngăn submit nếu có lỗi
                 if (!isValid) {
                     e.preventDefault();
                 }
@@ -122,3 +92,4 @@
         });
     </script>
 }
+

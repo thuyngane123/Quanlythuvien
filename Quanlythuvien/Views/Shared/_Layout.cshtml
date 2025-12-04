@@ -38,6 +38,24 @@
     </div>
     <!-- Spinner End -->
     <!-- Topbar Start -->
+    @{
+        var tenKh = Context.Session.GetString("Tendangnhap");
+    }
+    <div class="col-md-4 col-lg-6 text-center">
+        <div class="position-relative ps-4">
+            <div class="d-flex border rounded-pill">
+                @if (!string.IsNullOrEmpty(tenKh))
+                {
+                    <span class="px-3 py-2">Hello, @tenKh</span>
+                }
+                else
+                {
+                    <a href="@Url.Action("Index", "Login")" class="px-3 py-2">Đăng nhập</a>
+                }
+            </div>
+        </div>
+    </div>
+
 
     <div class="container-fluid px-5 py-4 d-none d-lg-block">
         <div class="row gx-0 align-items-center text-center">
@@ -49,6 +67,7 @@
                     </a>
                 </div>
             </div>
+
             <div class="col-md-4 col-lg-6 text-center">
                 <div class="position-relative ps-4">
                     <div class="d-flex border rounded-pill">
@@ -68,7 +87,7 @@
                 <div class="d-inline-flex align-items-center">
                     <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3"><span class="rounded-circle btn-md-square border"><i class="fas fa-random"></i></i></a>
                     <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3"><span class="rounded-circle btn-md-square border"><i class="fas fa-heart"></i></a>
-                    <a href="#" class="text-muted d-flex align-items-center justify-content-center"><span class="rounded-circle btn-md-square border"><i class="fas fa-shopping-cart"></i></span> <span class="text-dark ms-2">Tài khoản</span></a>
+                    <a asp-controller="Login" asp-action="Index" class="nav-item nav-link">Tài khoản</a>
                 </div>
             </div>
         </div>
@@ -100,9 +119,9 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto py-0">
-                            <a asp-area="Views" asp-controller="Home" asp-action="Index" class="nav-item nav-link active">Trang Chủ</a>
+                            <a asp-area="Views" asp-controller="Home" asp-action="Index" class="nav-item nav-link ">Trang Chủ</a>
                             <a asp-controller="Product" asp-action="Index" class="nav-item nav-link">Sách</a>
-                            <a href="single.html" class="nav-item nav-link">Mượn trả sách</a>
+                            <a asp-controller="Cart" asp-action="Index" class="nav-item nav-link">Mượn trả sách</a>
 
                             <a href="contact.html" class="nav-item nav-link me-2">Liên Hệ</a>
                             

@@ -8,13 +8,13 @@
 <div class="container mt-5">
     <div class="card shadow-lg border-0 rounded-4">
         <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
-            <h4 class="mb-0"><i class="bi bi-person-plus"></i> Sửa thông tin khách hàng mới</h4>
+            <h4 class="mb-0"><i class="bi bi-person-plus"></i> Sửa thông tin người đọc mới</h4>
         </div>
         <div class="card-body p-4">
             <form asp-action="Edit" method="post" accept-charset="utf-8">
                 <input type="hidden" asp-for="MaKh" />
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Mã khách hàng</label>
+                    <label class="form-label fw-semibold">Mã người đọc</label>
                     <input type="text" class="form-control" value="" readonly />
                 </div>
 
@@ -64,3 +64,60 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+
+            form.addEventListener("submit", function(e) {
+                let isValid = true;
+
+                // Lấy các input cần kiểm tra
+                const tendn = document.querySelector("[name='Tendangnhap']");
+                const matkhau = document.querySelector("[name='Matkhau']");
+                const hoten = document.querySelector("[name='Hoten']");
+                const email = document.querySelector("[name='Email']");
+                const sdt = document.querySelector("[name='Sodienthoai']");
+                const trangthai = document.querySelector("[name='Trangthai']");
+
+                // Xóa thông báo lỗi cũ
+                document.querySelectorAll(".text-danger").forEach(el => el.textContent = "");
+
+                if (tendn.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Tendangnhap']").textContent = "Tên đăng nhập không được để trống";
+                    isValid = false;
+                }
+
+                if (matkhau.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Matkhau']").textContent = "Mật khẩu không được để trống";
+                    isValid = false;
+                }
+
+                if (hoten.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Hoten']").textContent = "Họ tên không được để trống";
+                    isValid = false;
+                }
+
+                if (email.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Email']").textContent = "Email không được để trống";
+                    isValid = false;
+                }
+
+                if (sdt.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Sodienthoai']").textContent = "Số điện thoại không được để trống";
+                    isValid = false;
+                }
+
+                if (trangthai.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Trangthai']").textContent = "Trạng thái không được để trống";
+                    isValid = false;
+                }
+
+                // Nếu có lỗi thì không cho submit form
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}

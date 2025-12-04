@@ -1,0 +1,210 @@
+﻿@model Quanlythuvien.Models.TblSach
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+            <h4 class="mb-0"><i class="bi bi-book-half"></i> Sửa thông tin sách</h4>
+        </div>
+
+        <div class="card-body p-4">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="MaSach" />
+
+                <!-- Tên sách -->
+                <div class="mb-3">
+                    <label asp-for="TenSach" class="form-label fw-semibold"></label>
+                    <input asp-for="TenSach" class="form-control" placeholder="Nhập tên sách..." />
+                    <span asp-validation-for="TenSach" class="text-danger"></span>
+                </div>
+
+                <!-- Thể loại -->
+                <div class="form-group">
+                    <label asp-for="MaTl" class="form-label fw-semibold">Thể loại</label>
+                    <select asp-for="MaTl" asp-items="ViewBag.MaTl" class="form-control">
+                        <option value="">-- Chọn thể loại --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Tác giả</label>
+                    <select name="SelectedTgIds" class="form-control" multiple>
+                        @foreach (var tg in ViewBag.TacGiaList as List<Quanlythuvien.Models.TblTacGium>)
+                        {
+                            // Logic để kiểm tra tác giả đã chọn (Chỉ cần thiết cho Edit.cshtml)
+                            var isSelected = false;
+                            if (Model.MaTgs != null && Model.MaTgs.Any(t => t.MaTg == tg.MaTg))
+                            {
+                                isSelected = true;
+                            }
+
+                            <option value="@tg.MaTg" selected="@isSelected">@tg.TenTg</option>
+                        }
+                    </select>
+                    </div>
+
+                <!-- Nhà xuất bản -->
+                <div class="mb-3">
+                    <label asp-for="MaNxb" class="form-label fw-semibold">Nhà xuất bản</label>
+                    <select asp-for="MaNxb" asp-items="ViewBag.MaNxb" class="form-control">
+                        <option value="">-- Chọn nhà xuất bản --</option>
+                    </select>
+                    <span asp-validation-for="MaNxb" class="text-danger"></span>
+                </div>
+
+                <!-- Năm xuất bản -->
+                <div class="mb-3">
+                    <label asp-for="NamXb" class="form-label fw-semibold"></label>
+                    <input asp-for="NamXb" type="number" class="form-control" placeholder="Nhập năm xuất bản..." />
+                    <span asp-validation-for="NamXb" class="text-danger"></span>
+                </div>
+
+                <!-- Số lượng -->
+                <div class="mb-3">
+                    <label asp-for="Soluong" class="form-label fw-semibold"></label>
+                    <input asp-for="Soluong" type="number" class="form-control" placeholder="Nhập số lượng sách..." />
+                    <span asp-validation-for="Soluong" class="text-danger"></span>
+                </div>
+
+                <!-- Ảnh -->
+                <div class="mb-3">
+                    <label asp-for="Anh" class="form-label fw-semibold"></label>
+                    <input asp-for="Anh"  class="form-control"  />
+                    <span asp-validation-for="Anh" class="text-danger"></span>
+                </div>
+
+                <!-- Mô tả -->
+                <div class="mb-3">
+                    <label asp-for="Mota" class="form-label fw-semibold"></label>
+                    <textarea asp-for="Mota" class="form-control" rows="5" placeholder="Nhập mô tả chi tiết về sách..."></textarea>
+                    <span asp-validation-for="Mota" class="text-danger"></span>
+                </div>
+
+
+                <!-- Trạng thái -->
+                <div class="mb-3">
+                    <label asp-for="Trangthai" class="form-label fw-semibold"></label>
+                    <input asp-for="Trangthai" class="form-control" placeholder="Nhập trạng thái (VD: còn hàng / hết hàng)" />
+                    <span asp-validation-for="Trangthai" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left-circle"></i> Quay lại
+                    </a>
+                    <button type="submit" class="btn btn-success px-4">
+                        <i class="bi bi-check-circle"></i> Lưu thay đổi
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+
+            form.addEventListener("submit", function(e) {
+                let isValid = true;
+
+                // Lấy các input và select cần kiểm tra
+                const tenSach = document.querySelector("[name='TenSach']");
+                const maTl = document.querySelector("[name='MaTl']");
+                const maTg = document.querySelector("[name='MaTg']");
+                const maNxb = document.querySelector("[name='MaNxb']");
+                const soluong = document.querySelector("[name='Soluong']");
+                const namXb = document.querySelector("[name='NamXb']");
+                const anh = document.querySelector("[name='Anh']");
+                const mota = document.querySelector("[name='Mota']");
+                const trangthai = document.querySelector("[name='Trangthai']");
+
+                // Xóa lỗi cũ
+                document.querySelectorAll(".text-danger").forEach(el => el.textContent = "");
+                document.querySelectorAll(".form-control, select").forEach(el => el.classList.remove("is-invalid"));
+
+                // Kiểm tra tên sách
+                if (tenSach.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='TenSach']").textContent = "Tên sách không được để trống";
+                    tenSach.classList.add("is-invalid");
+                    isValid = false;
+                }
+
+                // Kiểm tra thể loại
+                if (maTl.value === "") {
+                    document.querySelector("[data-valmsg-for='MaTl']").textContent = "Vui lòng chọn thể loại";
+                    maTl.classList.add("is-invalid");
+                    isValid = false;
+                }
+
+                // Kiểm tra tác giả
+                if (maTg.value === "") {
+                    document.querySelector("[data-valmsg-for='MaTg']").textContent = "Vui lòng chọn tác giả";
+                    maTg.classList.add("is-invalid");
+                    isValid = false;
+                }
+
+                // Kiểm tra NXB
+                if (maNxb.value === "") {
+                    document.querySelector("[data-valmsg-for='MaNxb']").textContent = "Vui lòng chọn nhà xuất bản";
+                    maNxb.classList.add("is-invalid");
+                    isValid = false;
+                }
+
+                // Kiểm tra số lượng
+                if (soluong.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Soluong']").textContent = "Số lượng không được để trống";
+                    soluong.classList.add("is-invalid");
+                    isValid = false;
+                } else if (isNaN(soluong.value) || parseInt(soluong.value) <= 0) {
+                    document.querySelector("[data-valmsg-for='Soluong']").textContent = "Số lượng phải là số nguyên dương";
+                    soluong.classList.add("is-invalid");
+                    isValid = false;
+                }
+
+                // Kiểm tra năm xuất bản
+                if (namXb.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='NamXb']").textContent = "Năm xuất bản không được để trống";
+                    namXb.classList.add("is-invalid");
+                    isValid = false;
+                } else if (isNaN(namXb.value) || namXb.value < 1900 || namXb.value > new Date().getFullYear()) {
+                    document.querySelector("[data-valmsg-for='NamXb']").textContent = "Năm xuất bản không hợp lệ";
+                    namXb.classList.add("is-invalid");
+                    isValid = false;
+                }
+
+                // Kiểm tra mô tả
+                if (mota.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Mota']").textContent = "Mô tả không được để trống";
+                    mota.classList.add("is-invalid");
+                    isValid = false;
+                }
+
+                // Kiểm tra trạng thái
+                if (trangthai.value.trim() === "") {
+                    document.querySelector("[data-valmsg-for='Trangthai']").textContent = "Trạng thái không được để trống";
+                    trangthai.classList.add("is-invalid");
+                    isValid = false;
+                }
+
+                // Nếu có lỗi -> chặn submit
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+
+            // Xóa lỗi khi người dùng nhập lại
+            document.querySelectorAll(".form-control, select").forEach(input => {
+                input.addEventListener("input", function() {
+                    this.classList.remove("is-invalid");
+                    const span = document.querySelector(`[data-valmsg-for='${this.getAttribute("name")}']`);
+                    if (span) span.textContent = "";
+                });
+            });
+        });
+    </script>
+}

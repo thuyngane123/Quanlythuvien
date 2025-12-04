@@ -1,0 +1,141 @@
+﻿@model IEnumerable<Quanlythuvien.Models.TblMuonTra>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <meta charset="utf-8" />
+    <h1 class="h3 mb-2 text-gray-800">Quản lý Mượn Trả</h1>
+    <a asp-action="Create" class="btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-plus fa-sm text-white-50"></i> Thêm phiếu mượn mới
+    </a>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary">Danh sách phiếu mượn</h6>
+            <span class="badge badge-info p-2">Tổng số phiếu: @Model.Count()</span>
+        </div>
+
+        <div class="row mb-4 px-3">
+            <!-- Tổng số phiếu -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <div>
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Tổng số phiếu mượn
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.Count()</div>
+                        </div>
+                        <i class="fas fa-book fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Đang mượn -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <div>
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Phiếu đang mượn
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                @Model.Count(x => x.Trangthai == "Đang mượn")
+                            </div>
+                        </div>
+                        <i class="fas fa-hourglass-half fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Đã trả -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <div>
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Phiếu đã trả
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                @Model.Count(x => x.Trangthai == "Đã trả")
+                            </div>
+                        </div>
+                        <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bảng dữ liệu -->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="bg-primary text-white text-center">
+                        <tr>
+                            <th>Mã phiếu</th>
+                            <th>Tên khách hàng</th>
+                            <th>Tên sách</th>
+                            <th>Ngày mượn</th>
+                            <th>Ngày trả</th>
+                            <th>Trạng thái</th>
+                            <th style="width:180px;">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="text-center">
+                                <td>@item.MaMuon</td>
+                                <td>@item.MaKhNavigation?.Hoten</td>
+                                <td>@item.MaSachNavigation?.TenSach</td>
+
+                                <td>@item.Ngaymuon?.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    @(item.Ngaytra.HasValue
+                                        ? item.Ngaytra.Value.ToString("dd/MM/yyyy")
+                                        : "-")
+                                </td>
+                                <td>
+                                    @if (item.Trangthai == "Đang mượn")
+                                    {
+                                        <span class="badge badge-warning">@item.Trangthai</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-success">@item.Trangthai</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.MaMuon" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i> Sửa
+                                    </a>
+                                    @if (item.Trangthai == "Đang mượn")
+                                    {
+                                        <a asp-action="TraSach" asp-route-id="@item.MaMuon"
+                                           onclick="return confirm('Bạn chắc chắn muốn trả sách này?')"
+                                           class="btn btn-success btn-sm">
+                                            <i class="fas fa-undo"></i> Trả
+                                        </a>
+
+                                    }
+                                    <a asp-action="Delete" asp-route-id="@item.MaMuon" class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Bạn có chắc muốn xóa phiếu này?')">
+                                        <i class="fas fa-trash"></i> Xóa
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->

@@ -1,0 +1,90 @@
+﻿@model Quanlythuvien.Models.TblSach
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+            <h4 class="mb-0"><i class="bi bi-person-plus"></i> Thêm sách mới</h4>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Create" method="post" accept-charset="utf-8">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3" role="alert"></div>
+                
+                <div class="mb-3">
+                    <label asp-for="TenSach" class="form-label fw-semibold"></label>
+                    <input asp-for="TenSach" class="form-control" placeholder="Nhập tên sách..." />
+                    <span asp-validation-for="TenSach" class="text-danger"></span>
+                </div>
+                <!-- Thể loại -->
+                <div class="form-group mb-3">
+                    <label asp-for="MaTg" class="form-label fw-semibold">Tác giả</label>
+                    <select asp-for="MaTg" asp-items="ViewBag.MaTg" class="form-control" required>
+                        <option value="0" disabled selected>-- Chọn tác giả --</option>
+                    </select>
+                    <span asp-validation-for="MaTg" class="text-danger"></span>
+                </div>
+                <!-- Thể loại -->
+                <div class="form-group mb-3">
+                    <label asp-for="MaTl" class="form-label fw-semibold">Thể loại</label>
+                    <select asp-for="MaTl" asp-items="ViewBag.MaTl" class="form-control" required>
+                        <option value="0" disabled selected>-- Chọn thể loại --</option>
+                    </select>
+                    <span asp-validation-for="MaTl" class="text-danger"></span>
+                </div>
+
+                <!-- Nhà xuất bản -->
+                <div class="form-group mb-3">
+                    <label asp-for="MaNxb" class="form-label fw-semibold">Nhà xuất bản</label>
+                    <select asp-for="MaNxb" asp-items="ViewBag.MaNxb" class="form-control" required>
+                        <option value="0" disabled selected>-- Chọn NXB --</option>
+                    </select>
+                    <span asp-validation-for="MaNxb" class="text-danger"></span>
+                </div>
+
+
+
+
+                <div class="mb-3">
+                    <label asp-for="Soluong" class="form-label fw-semibold"></label>
+                    <input asp-for="Soluong" class="form-control" placeholder="Nhập số lượng sách..." />
+                    <span asp-validation-for="Soluong" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="NamXb" class="form-label fw-semibold"></label>
+                    <input asp-for="NamXb" class="form-control" placeholder="Nhập năm xuất bản..." />
+                    <span asp-validation-for="NamXb" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Ảnh (đường dẫn)</label>
+                    <input asp-for="Anh" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Mota" class="form-label fw-semibold"></label>
+                    <textarea asp-for="Mota" class="form-control" rows="5" placeholder="Nhập mô tả chi tiết về sách..."></textarea>
+                    <span asp-validation-for="Mota" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Trangthai" class="form-label fw-semibold"></label>
+                    <input asp-for="Trangthai" class="form-control" placeholder="Nhập trạng thái..." />
+                    <span asp-validation-for="Trangthai" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left-circle"></i> Quay lại
+                    </a>
+                    <button type="submit" class="btn btn-success px-4">
+                        <i class="bi bi-check-circle"></i> Thêm mới
+                    </button>
+                </div>
+            </form>
+            <div asp-validation-summary="All" class="alert alert-danger"></div>
+
+        </div>
+    </div>
+</div>
